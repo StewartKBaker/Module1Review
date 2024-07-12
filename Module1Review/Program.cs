@@ -31,7 +31,9 @@ class Program
     //Used to call methods and use them
     static void Main(string[] args)
     {
-        //bool used to loop through code if an invalid shape is given so user doesnt have to press play again
+        //bool used for the exitLoop, so the user can find the area of another shape without having to press play again
+        bool exitLoop = false;
+        //bool used to loop through code if an invalid shape is given so user doesn't have to press play again
         bool finishArea = false;
         while (!finishArea)
         {
@@ -45,27 +47,31 @@ class Program
             {
                 //creates case for circle input
                 case "circle":
+                    //uses a bool to loop through code when input is invalid
                     bool finishCircle = false;
+                    
                     while (!finishCircle)
                     {
                         //Asks for radius and stores it
-                        Console.WriteLine("What is the Radius of your Circle?");
+                        Console.WriteLine("\nWhat is the Radius of your Circle?");
                         string radiusInput = Console.ReadLine();
-
+                        
+                        //checks to make sure its inputs can be turned into double
                         if (double.TryParse(radiusInput, out double radius))
                         {
-                            Console.WriteLine($"The area of a circle with a radius of {radius} is {AreaOfCircle(radius)}");
+                            //output when input is valid
+                            Console.WriteLine($"\nThe area of a circle with a radius of {radius} is {AreaOfCircle(radius)}");
+                            //used to exit loop
                             finishCircle = true;
                         }
                         else
                         {
-                            //output when input isnt valid
-                            Console.WriteLine("Invalid Input. Please input a Valid Integer");
+                            //output when input isn't valid
+                            Console.WriteLine("\nInvalid Input. Please input a Valid Integer");
                         }
                     }
 
-                    //bool is set to true to exit shape loop
-                    finishArea = true;
+                    exitLoop = true;
                     break;
 
                     //Creates case for triangle input
@@ -76,11 +82,11 @@ class Program
                     while (!finishTriangle)
                     {
                         //Asks user for length and stores it
-                        Console.WriteLine("What is the Length of your Triangle?");
+                        Console.WriteLine("\nWhat is the Length of your Triangle?");
                         string baseLengthInput = Console.ReadLine();
 
                         //Asks user for height and stores it
-                        Console.WriteLine("What is the Height of your Triangle?");
+                        Console.WriteLine("\nWhat is the Height of your Triangle?");
                         string heightInput = Console.ReadLine();
 
                         //TryParse to make sure both inputs are an integer, if not, prints else statement and loops back for new input
@@ -88,33 +94,81 @@ class Program
                             double.TryParse(heightInput, out double height))
                         {
                             //output given when integers are valid which calls the method
-                            Console.WriteLine($"The are of a triangle with the baseLength of {baseLength} and height of {height} is {AreaOfTriangle(baseLength, height)}");
+                            Console.WriteLine($"\nThe Area of a Triangle with the base of {baseLength} and height of {height} is {AreaOfTriangle(baseLength, height)}");
                             //sets bool to true, exiting loop.
                             finishTriangle = true;
                         }
                         else
                         {
                             //output when input isnt valid
-                            Console.WriteLine("Invalid Input. Please input a Valid Integer");
+                            Console.WriteLine("\nInvalid Input. Please input a Valid Integer");
                         }
                     }
 
+                    exitLoop = true;
                     break;
 
                 case "rectangle":
+                    bool finishRectangle = false;
 
+                    while (!finishRectangle)
+                    {
+                        Console.WriteLine("\nWhat is the length of your rectangle?");
+                        string lengthInput = Console.ReadLine();
+                        
+                        Console.WriteLine("\nWhat is the width of your Rectangle?");
+                        string widthInput = Console.ReadLine();
+
+                        if (double.TryParse(lengthInput, out double length) &&
+                            double.TryParse(widthInput, out double width))
+                        {
+                            Console.WriteLine($"\nThe Area of a Rectangle with the length of {length} and width of {width} is {AreaOfRectangle(length, width)}");
+                            finishRectangle = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nInvalid Input. Please input a Valid Integer");
+                        }
+                    }
+
+                    exitLoop = true;
                     break;
+                
                 case "square":
 
                     break;
+                
                 //default output if user input does not match any shapes
                 default:
                     Console.WriteLine("Invalid Shape, Please pick a valid shape.");
                     break;
             }
+
+            if (exitLoop == true)
+            {
+                Console.WriteLine("\nWould you like to find the area of another shape?\n(Y)es\n(N)o");
+
+                while (exitLoop)
+                {
+
+                    string continueProgram = Console.ReadLine();
+                    if (continueProgram == "y" || continueProgram == "Y")
+                    {
+                        Console.Clear();
+                        exitLoop = false;
+                    }
+                    else if (continueProgram == "n" || continueProgram == "N")
+                    {
+                        finishArea = true;
+                        exitLoop = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Input Invalid, please use Y or N");
+                    }
+                }
+            }
         }
-        //Code for Triangle
-        
         
     }
 }
