@@ -50,6 +50,7 @@ class Program
                     //uses a bool to loop through code when input is invalid
                     bool finishCircle = false;
                     
+                    //loops while bool is false
                     while (!finishCircle)
                     {
                         //Asks for radius and stores it
@@ -74,11 +75,12 @@ class Program
                     exitLoop = true;
                     break;
 
-                    //Creates case for triangle input
-                    case "triangle":
+                //Creates case for triangle input
+                case "triangle":
                     //uses bool to loop through code when an invalid integer is given.
                     bool finishTriangle = false;
-
+                    
+                    //loops while bool is false
                     while (!finishTriangle)
                     {
                         //Asks user for length and stores it
@@ -107,35 +109,68 @@ class Program
 
                     exitLoop = true;
                     break;
-
+                 
+                //creates case for rectangle input
                 case "rectangle":
+                    //uses bool to loop through code if integer is invalid
                     bool finishRectangle = false;
-
+                    
+                    //loops while bool is false
                     while (!finishRectangle)
                     {
+                        //asks user for length and stores it in a string
                         Console.WriteLine("\nWhat is the length of your rectangle?");
                         string lengthInput = Console.ReadLine();
                         
+                        //asks user for width and stores it in a string
                         Console.WriteLine("\nWhat is the width of your Rectangle?");
                         string widthInput = Console.ReadLine();
-
+                        
+                        //checks to make sure inputs can be changed to double and then outputs new double variables
                         if (double.TryParse(lengthInput, out double length) &&
                             double.TryParse(widthInput, out double width))
                         {
+                            //output given if inputs can be changed to double
                             Console.WriteLine($"\nThe Area of a Rectangle with the length of {length} and width of {width} is {AreaOfRectangle(length, width)}");
+                            //sets bool to true, exiting the loop
                             finishRectangle = true;
                         }
                         else
                         {
+                            //output given if inputs can not be changed
                             Console.WriteLine("\nInvalid Input. Please input a Valid Integer");
                         }
                     }
-
                     exitLoop = true;
                     break;
                 
+                //creates case for user input square
                 case "square":
+                    //creates bool to loop
+                    bool finishSquare = false;
 
+                    //loops while bool is false
+                    while (!finishSquare)
+                    {
+                        //asks user for side input and stores as string
+                        Console.WriteLine("\nWhat is the side length of your square?");
+                        string sideInput = Console.ReadLine();
+
+                        //checks to make sure input can be changed to double and makes new double variable with input
+                        if (double.TryParse(sideInput, out double side))
+                        {
+                            //output when input can be set to double
+                            Console.WriteLine($"\nThe Area of a Square with a side length of {side} is {AreaOfSquare(side)}");
+                            //sets bool to true; exiting code
+                            finishSquare = true;
+                        }
+                        else
+                        {
+                            //output when input cannot be set to double
+                            Console.WriteLine("\nInvalid Input. Please input a Valid Integer");
+                        }
+                    }
+                    exitLoop = true;
                     break;
                 
                 //default output if user input does not match any shapes
@@ -144,31 +179,38 @@ class Program
                     break;
             }
 
+            //once exit loop is set to true, exit loop will function
             if (exitLoop == true)
             {
+                //asks user if they want to find the area of another shape
                 Console.WriteLine("\nWould you like to find the area of another shape?\n(Y)es\n(N)o");
 
+                //loops while exitLoop is true
                 while (exitLoop)
                 {
 
+                    //sets input to string and checks if input is equal to y or Y
                     string continueProgram = Console.ReadLine();
                     if (continueProgram == "y" || continueProgram == "Y")
                     {
+                        //clears console and sets exit loop back to false, restarting the code from the beginning
                         Console.Clear();
                         exitLoop = false;
                     }
+                    //checks if input is equal to n or N
                     else if (continueProgram == "n" || continueProgram == "N")
                     {
+                        //sets finish area to true, and exit loop to false, exiting both loops and closing the program.
                         finishArea = true;
                         exitLoop = false;
                     }
                     else
                     {
+                        //output if input is not y / Y or n / N
                         Console.WriteLine("Input Invalid, please use Y or N");
                     }
                 }
             }
         }
-        
     }
 }
