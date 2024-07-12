@@ -39,11 +39,47 @@ class Program
         switch (shape.ToLower())
         {
             case "circle":
-
+                bool finishCircle = false;
+                while (!finishCircle)
+                {
+                    Console.WriteLine("What is the Radius of your Circle?");
+                    
+                }
+                
                 break;
+            
+            //Creates case for input of triangle
             case "triangle":
+                //uses bool to loop through code when an invalid integer is given.
+                bool finishTriangle = false;
+                
+                while (!finishTriangle)
+                {
+                    //Asks user for length and stores it
+                    Console.WriteLine("What is the Length of your Triangle?");
+                    string lengthInput = Console.ReadLine();
+                    
+                    //Asks user for height and stores it
+                    Console.WriteLine("What is the Height of your Triangle?");
+                    string heightInput = Console.ReadLine();
 
+                    //TryParse to make sure both inputs are an integer, if not, prints else statement and loops back for new input
+                    if (double.TryParse(lengthInput, out double baseLength) &&
+                        double.TryParse(heightInput, out double height))
+                    {
+                        //output given when integers are valid which calls the method
+                        Console.WriteLine($"The are of a triangle with the baseLength of {baseLength} and height of {height} is {AreaOfTriangle(baseLength, height)}");
+                        //sets bool to true, exiting loop.
+                        finishTriangle = true;
+                    }
+                    else
+                    {
+                        //output when input isnt valid
+                        Console.WriteLine("Invalid Input. Please input a Valid Integer");
+                    }
+                }
                 break;
+            
             case "rectangle":
 
                 break;
@@ -56,10 +92,7 @@ class Program
                 break;
         }
         //Code for Triangle
-        Console.WriteLine("What is the Length of your Triangle?");
-        double baseLength = double.Parse(Console.ReadLine());
-        Console.WriteLine("What is the Height of your Triangle?");
-        double height = double.Parse(Console.ReadLine());
-        Console.WriteLine($"The are of a triangle with the baseLength of {baseLength} and height of {height} is {AreaOfTriangle(baseLength, height)}");
+        
+        
     }
 }
