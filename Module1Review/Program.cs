@@ -3,29 +3,137 @@
 class Program
 {
     //Create method to get the area of a circle
-    public static double AreaOfCircle(double radius)
+    public static void AreaOfCircle()
     {
-        //uses .PI and .Pow for formula of a circle and then returns area
-        return Math.PI * Math.Pow(radius, 2);
+        //uses a bool to loop through code when input is invalid
+        bool finishCircle = false;
+                    
+        //loops while bool is false
+        while (!finishCircle)
+        {
+            //Asks for radius and stores it
+            Console.WriteLine("\nWhat is the Radius of your Circle?");
+            string radiusInput = Console.ReadLine();
+                        
+            //checks to make sure its inputs can be turned into double
+            if (double.TryParse(radiusInput, out double radius))
+            {
+                //creates a new variable to store math of area for output
+                double area = Math.PI * Math.Pow(radius, 2);
+                //output when input is valid
+                Console.WriteLine($"\nThe area of a circle with a radius of {radius} is {area}");
+                //used to exit loop
+                finishCircle = true;
+            }
+            else
+            {
+                //output when input isn't valid
+                Console.WriteLine("\nInvalid Input. Please input a Valid Integer");
+            }
+        }
     }
     
     //Create method to get the area of a triangle
-    public static double AreaOfTriangle(double baseLength, double height)
+    public static void AreaOfTriangle()
     {
-        return baseLength * height / 2;
+        //uses bool to loop through code when an invalid integer is given.
+        bool finishTriangle = false;
+                    
+        //loops while bool is false
+        while (!finishTriangle)
+        {
+            //Asks user for length and stores it
+            Console.WriteLine("\nWhat is the Length of your Triangle?");
+            string baseLengthInput = Console.ReadLine();
+
+            //Asks user for height and stores it
+            Console.WriteLine("\nWhat is the Height of your Triangle?");
+            string heightInput = Console.ReadLine();
+
+            //TryParse to make sure both inputs are an integer, if not, prints else statement and loops back for new input
+            if (double.TryParse(baseLengthInput, out double baseLength) &&
+                double.TryParse(heightInput, out double height))
+            {
+                //creates a new variable to store math of area for output
+                double area = baseLength * height / 2;
+                //output given when integers are valid which calls the method
+                Console.WriteLine($"\nThe Area of a Triangle with the base of {baseLength} and height of {height} is {area}");
+                //sets bool to true, exiting loop.
+                finishTriangle = true;
+            }
+            else
+            {
+                //output when input isn't valid
+                Console.WriteLine("\nInvalid Input. Please input a Valid Integer");
+            }
+        }
     }
     
     //Create method to get the area of a rectangle
-    public static double AreaOfRectangle(double length, double width)
+    public static void AreaOfRectangle()
     {
-        return length * width;
+        //uses bool to loop through code if integer is invalid
+        bool finishRectangle = false;
+                    
+        //loops while bool is false
+        while (!finishRectangle)
+        {
+            //asks user for length and stores it in a string
+            Console.WriteLine("\nWhat is the length of your rectangle?");
+            string lengthInput = Console.ReadLine();
+                        
+            //asks user for width and stores it in a string
+            Console.WriteLine("\nWhat is the width of your Rectangle?");
+            string widthInput = Console.ReadLine();
+                        
+            //checks to make sure inputs can be changed to double and then outputs new double variables
+            if (double.TryParse(lengthInput, out double length) &&
+                double.TryParse(widthInput, out double width))
+            {
+                //creates a new variable to store math of area for output
+                var area = length * width;
+                //output given if inputs can be changed to double
+                Console.WriteLine($"\nThe Area of a Rectangle with the length of {length} and width of {width} is {area}");
+                //sets bool to true, exiting the loop
+                finishRectangle = true;
+            }
+            else
+            {
+                //output given if inputs can not be changed
+                Console.WriteLine("\nInvalid Input. Please input a Valid Integer");
+            }
+        }
     }
     
     //Create method to get the area pf a square
-    public static double AreaOfSquare(double side)
+    public static void AreaOfSquare()
     {
-        //side^2
-        return Math.Pow(side, 2);
+        //creates bool to loop
+        bool finishSquare = false;
+
+        //loops while bool is false
+        while (!finishSquare)
+        {
+            //asks user for side input and stores as string
+            Console.WriteLine("\nWhat is the side length of your square?");
+            string sideInput = Console.ReadLine();
+
+            //checks to make sure input can be changed to double and makes new double variable with input
+            if (double.TryParse(sideInput, out double side))
+            {
+                //creates a new variable to store math of area for output
+                var area = Math.Pow(side, 2);
+                //output when input can be set to double
+                Console.WriteLine($"\nThe Area of a Square with a side length of {side} is {area}");
+                //sets bool to true; exiting code
+                finishSquare = true;
+            }
+            else
+            {
+                //output when input cannot be set to double
+                Console.WriteLine("\nInvalid Input. Please input a Valid Integer");
+            }
+        }
     }
     
     //Used to call methods and use them
@@ -47,130 +155,26 @@ class Program
             {
                 //creates case for circle input
                 case "circle":
-                    //uses a bool to loop through code when input is invalid
-                    bool finishCircle = false;
-                    
-                    //loops while bool is false
-                    while (!finishCircle)
-                    {
-                        //Asks for radius and stores it
-                        Console.WriteLine("\nWhat is the Radius of your Circle?");
-                        string radiusInput = Console.ReadLine();
-                        
-                        //checks to make sure its inputs can be turned into double
-                        if (double.TryParse(radiusInput, out double radius))
-                        {
-                            //output when input is valid
-                            Console.WriteLine($"\nThe area of a circle with a radius of {radius} is {AreaOfCircle(radius)}");
-                            //used to exit loop
-                            finishCircle = true;
-                        }
-                        else
-                        {
-                            //output when input isn't valid
-                            Console.WriteLine("\nInvalid Input. Please input a Valid Integer");
-                        }
-                    }
-
-                    exitLoop = true;
+                    AreaOfCircle();
+                    exitLoop = true; //sets exit loop to true, opening exit loop for use
                     break;
-
+                
                 //Creates case for triangle input
                 case "triangle":
-                    //uses bool to loop through code when an invalid integer is given.
-                    bool finishTriangle = false;
-                    
-                    //loops while bool is false
-                    while (!finishTriangle)
-                    {
-                        //Asks user for length and stores it
-                        Console.WriteLine("\nWhat is the Length of your Triangle?");
-                        string baseLengthInput = Console.ReadLine();
-
-                        //Asks user for height and stores it
-                        Console.WriteLine("\nWhat is the Height of your Triangle?");
-                        string heightInput = Console.ReadLine();
-
-                        //TryParse to make sure both inputs are an integer, if not, prints else statement and loops back for new input
-                        if (double.TryParse(baseLengthInput, out double baseLength) &&
-                            double.TryParse(heightInput, out double height))
-                        {
-                            //output given when integers are valid which calls the method
-                            Console.WriteLine($"\nThe Area of a Triangle with the base of {baseLength} and height of {height} is {AreaOfTriangle(baseLength, height)}");
-                            //sets bool to true, exiting loop.
-                            finishTriangle = true;
-                        }
-                        else
-                        {
-                            //output when input isnt valid
-                            Console.WriteLine("\nInvalid Input. Please input a Valid Integer");
-                        }
-                    }
-
-                    exitLoop = true;
+                    AreaOfTriangle();
+                    exitLoop = true; //sets exit loop to true, opening exit loop for use
                     break;
-                 
+                
                 //creates case for rectangle input
                 case "rectangle":
-                    //uses bool to loop through code if integer is invalid
-                    bool finishRectangle = false;
-                    
-                    //loops while bool is false
-                    while (!finishRectangle)
-                    {
-                        //asks user for length and stores it in a string
-                        Console.WriteLine("\nWhat is the length of your rectangle?");
-                        string lengthInput = Console.ReadLine();
-                        
-                        //asks user for width and stores it in a string
-                        Console.WriteLine("\nWhat is the width of your Rectangle?");
-                        string widthInput = Console.ReadLine();
-                        
-                        //checks to make sure inputs can be changed to double and then outputs new double variables
-                        if (double.TryParse(lengthInput, out double length) &&
-                            double.TryParse(widthInput, out double width))
-                        {
-                            //output given if inputs can be changed to double
-                            Console.WriteLine($"\nThe Area of a Rectangle with the length of {length} and width of {width} is {AreaOfRectangle(length, width)}");
-                            //sets bool to true, exiting the loop
-                            finishRectangle = true;
-                        }
-                        else
-                        {
-                            //output given if inputs can not be changed
-                            Console.WriteLine("\nInvalid Input. Please input a Valid Integer");
-                        }
-                    }
-                    exitLoop = true;
+                    AreaOfRectangle();
+                    exitLoop = true; //sets exit loop to true, opening exit loop for use
                     break;
                 
                 //creates case for user input square
                 case "square":
-                    //creates bool to loop
-                    bool finishSquare = false;
-
-                    //loops while bool is false
-                    while (!finishSquare)
-                    {
-                        //asks user for side input and stores as string
-                        Console.WriteLine("\nWhat is the side length of your square?");
-                        string sideInput = Console.ReadLine();
-
-                        //checks to make sure input can be changed to double and makes new double variable with input
-                        if (double.TryParse(sideInput, out double side))
-                        {
-                            //output when input can be set to double
-                            Console.WriteLine($"\nThe Area of a Square with a side length of {side} is {AreaOfSquare(side)}");
-                            //sets bool to true; exiting code
-                            finishSquare = true;
-                        }
-                        else
-                        {
-                            //output when input cannot be set to double
-                            Console.WriteLine("\nInvalid Input. Please input a Valid Integer");
-                        }
-                    }
-                    exitLoop = true;
+                    AreaOfSquare();
+                    exitLoop = true; //sets exit loop to true, opening exit loop for use
                     break;
                 
                 //default output if user input does not match any shapes
